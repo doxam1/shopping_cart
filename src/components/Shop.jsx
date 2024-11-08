@@ -1,5 +1,11 @@
+import Products from "./productFetch/Products";
+
 const Shop = () => {
-  return <div>this is the shop page</div>;
+  return (
+    <>
+      <Products />
+    </>
+  );
 };
 
 export default Shop;
