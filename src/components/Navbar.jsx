@@ -2,6 +2,9 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { FaHome } from "react-icons/fa";
 import { GiRotaryPhone } from "react-icons/gi";
+import { IoCartOutline } from "react-icons/io5";
+import { useContext } from "react";
+import { ClientContext } from "../App";
 
 const Wrapper = styled.div`
   /* padding: 1rem; */
@@ -24,7 +27,7 @@ const Wrapper = styled.div`
 
   & a:hover {
     opacity: 75%;
-    &:not(.icon) {
+    &:not(.icon):not(.iconCart) {
       text-decoration-line: underline;
       text-underline-offset: 1rem;
       color: #053c4e;
@@ -35,6 +38,15 @@ const Wrapper = styled.div`
     margin-right: 4rem;
     margin-left: 1rem;
     font-size: 2.5rem;
+  }
+  .iconCart {
+    margin-left: auto;
+
+    & > svg {
+      font-size: 2rem;
+      margin-right: 3rem;
+      margin-top: 1rem;
+    }
   }
 
   /* & a:not(.icon) {
@@ -47,7 +59,12 @@ const Wrapper = styled.div`
     }
   } */
 `;
-
+const CartItemsNum = styled.span`
+  position: relative;
+  right: 55%;
+  font-size: medium;
+  text-decoration: none;
+`;
 const Header = styled(Wrapper)`
   background-color: #053c4e;
   font-size: medium;
@@ -63,6 +80,8 @@ const navLinkActiveStyle = ({ isActive }) => {
   };
 };
 const Navbar = () => {
+  const { cart } = useContext(ClientContext);
+  console.log(cart.length);
   return (
     <>
       <Header>
@@ -78,6 +97,10 @@ const Navbar = () => {
         </NavLink>
         <NavLink to="shop" style={navLinkActiveStyle}>
           &nbsp;&nbsp;Shop&nbsp;&nbsp;
+        </NavLink>
+        <NavLink to="cart" className="iconCart">
+          <IoCartOutline />
+          {cart.length > 0 && <CartItemsNum>{`${cart.length}`}</CartItemsNum>}
         </NavLink>
       </Wrapper>
     </>
