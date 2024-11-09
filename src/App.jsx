@@ -4,7 +4,7 @@ import Home from "./components/Home";
 import ErrorElement from "./components/ErrorElement";
 import Shop from "./components/Shop";
 import ShoppingCart from "./components/ShoppingCart";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +22,12 @@ const ClientContext = createContext();
 
 function App() {
   const [cart, setCart] = useState([]);
+
+  // get cart on rerenders&page refresh from local storages:
+  useEffect(() => {
+    const cartData = JSON.parse(localStorage.getItem("cart"));
+    if (cartData) setCart(cartData);
+  }, []);
 
   return (
     <>

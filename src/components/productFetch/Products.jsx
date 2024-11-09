@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useContext } from "react";
 import { ClientContext } from "../../App";
+import style from "../../style/Products.module.scss";
 
 const Wrapper = styled.div`
   display: grid;
@@ -46,6 +47,11 @@ const Products = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // save cart on rerenders&page refresh to local storage.
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -63,7 +69,7 @@ const Products = () => {
     };
 
     fetchProductData();
-  }, []);
+  }, [data]);
 
   return (
     <>
@@ -80,9 +86,14 @@ const Products = () => {
                 <Stock> In Stock </Stock>
 
                 <h4>${product.price}</h4>
-                <button onClick={() => setCart([...cart, product])}>
-                  Add to Cart{" "}
-                </button>
+                <div className={style.quntityAddBtnDiv}>
+                  <label htmlFor="quantity">
+                    <input type="number" placeholder="Quantity" min="0" />
+                  </label>
+                  <button onClick={() => setCart([...cart, product])}>
+                    Add to Cart{" "}
+                  </button>
+                </div>
               </ProductDiv>
             ))}
         </Wrapper>

@@ -41,6 +41,7 @@ const Wrapper = styled.div`
   }
   .iconCart {
     margin-left: auto;
+    position: relative;
 
     & > svg {
       font-size: 2rem;
@@ -60,9 +61,11 @@ const Wrapper = styled.div`
   } */
 `;
 const CartItemsNum = styled.span`
-  position: relative;
-  right: 55%;
+  position: absolute;
+  right: 50%;
+  bottom: 5%;
   font-size: medium;
+  color: #116392;
   text-decoration: none;
 `;
 const Header = styled(Wrapper)`
