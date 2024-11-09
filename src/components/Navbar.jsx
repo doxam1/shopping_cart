@@ -84,7 +84,7 @@ const navLinkActiveStyle = ({ isActive }) => {
 };
 const Navbar = () => {
   const { cart } = useContext(ClientContext);
-  console.log(cart.length);
+
   return (
     <>
       <Header>
