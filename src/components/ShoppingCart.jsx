@@ -61,6 +61,12 @@ const ShoppingCart = () => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
+  const removeFromCart = (product) => {
+    const newCart = cart.filter((item) => item.id != product.id);
+    setCart(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
+  };
+
   return (
     <>
       <AllCartWrapper>
@@ -81,8 +87,9 @@ const ShoppingCart = () => {
                     type="number"
                     value={item.quantity}
                     onChange={(e) => newQuantity(item, e.target.value)}
+                    min={1}
                   />
-                  <button>Remove</button>
+                  <button onClick={() => removeFromCart(item)}>Remove</button>
                 </div>
               </span>
             </div>

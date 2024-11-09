@@ -54,12 +54,15 @@ const ProductCard = (props) => {
       // If the product is already in the cart, update its quantity
       updatedCart = cart.map((product, index) =>
         index === existingProductIndex
-          ? { ...product, quantity: product.quantity + newQuantity }
+          ? { ...product, quantity: product.quantity + parseInt(newQuantity) }
           : product
       );
     } else {
       // If the product is not in the cart, add it with the specified quantity
-      updatedCart = [...cart, { ...props.product, quantity: newQuantity }];
+      updatedCart = [
+        ...cart,
+        { ...props.product, quantity: parseInt(newQuantity) },
+      ];
     }
 
     setCart(updatedCart);
@@ -100,16 +103,10 @@ const ProductCard = (props) => {
             type="number"
             placeholder="Quantity"
             min="0"
-            onChange={() => setQuantity(quantity + 1)}
+            onChange={(e) => setQuantity(parseInt(e.target.value))}
           />
         </label>
-        <button
-          onClick={
-            /* () => setCart([...cart, props.product]) */ () =>
-              addToCart(quantity)
-          }>
-          Add to Cart{" "}
-        </button>
+        <button onClick={() => addToCart(quantity)}>Add to Cart </button>
       </div>
     </ProductDiv>
   );
