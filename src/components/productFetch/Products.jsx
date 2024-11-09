@@ -2,6 +2,12 @@ import { getFetcherWithNativeFetch } from "./getProductWithNativeFetch";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ProductCard from "./ProductCard";
+import { FadeLoader } from "react-spinners";
+
+const Spinner = styled(FadeLoader)`
+  margin: 0 auto;
+  margin-top: 10%;
+`;
 
 const Wrapper = styled.div`
   display: grid;
@@ -37,7 +43,7 @@ const Products = () => {
   return (
     <>
       <div>
-        <p>{loading && "loading..."}</p>
+        <p>{loading && <Spinner color={"rgba(46, 46, 46, 0.3)"} />}</p>
         <p>{error && `${error}`}</p>
         <Wrapper>
           {data &&

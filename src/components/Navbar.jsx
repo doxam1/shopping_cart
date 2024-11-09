@@ -57,6 +57,7 @@ const CartItemsNum = styled.span`
 const Header = styled(Wrapper)`
   background-color: #053c4e;
   font-size: medium;
+  text-align: center;
 
   p {
     color: #fff;
@@ -75,7 +76,7 @@ const Navbar = () => {
     <>
       <Header>
         <p>
-          Need help? please call us{" "}
+          Need help? please call us <br />
           <GiRotaryPhone style={{ position: "relative", top: "3px" }} />{" "}
           972-3-1123312
         </p>
