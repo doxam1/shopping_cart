@@ -19,8 +19,8 @@ const Wrapper = styled.div`
     color: #424242;
     text-decoration: none;
 
-    &:not(.icon) {
-      /* margin: 0 auto; */
+    &:not(.icon):not(.iconCart) {
+      margin: 0 auto;
       font-size: large;
     }
   }
@@ -35,8 +35,6 @@ const Wrapper = styled.div`
   }
 
   .icon {
-    margin-right: 4rem;
-    margin-left: 1rem;
     font-size: 2.5rem;
   }
   .iconCart {
@@ -44,26 +42,14 @@ const Wrapper = styled.div`
     position: relative;
 
     & > svg {
-      font-size: 2rem;
-      margin-right: 3rem;
-      margin-top: 1rem;
+      font-size: 2.5rem;
     }
   }
-
-  /* & a:not(.icon) {
-    padding: 0.4em 0.8em;
-    color: #aaa;
-    text-decoration: none;
-
-    &:hover {
-      
-    }
-  } */
 `;
 const CartItemsNum = styled.span`
   position: absolute;
-  right: 50%;
-  bottom: 5%;
+  right: 40%;
+  bottom: 70%;
   font-size: medium;
   color: #116392;
   text-decoration: none;

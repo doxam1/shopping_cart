@@ -7,24 +7,7 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
-
-  & > div {
-    min-height: 200px;
-    margin: 0 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    & * {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-
-    & > img {
-      max-width: 60%;
-      margin: 0 auto;
-    }
-  }
+  padding: 0 1rem;
 `;
 
 const Products = () => {
@@ -60,7 +43,7 @@ const Products = () => {
           {data &&
             data.map((product) => (
               <ProductCard
-                key={product.id}
+                key={product.title}
                 id={product.id}
                 image={product.image}
                 title={product.title}

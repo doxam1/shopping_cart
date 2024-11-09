@@ -24,6 +24,10 @@ const CartWrapper = styled.div`
   }
 `;
 
+const Input = styled.input`
+  max-width: 120px;
+`;
+
 const AllCartWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -31,7 +35,6 @@ const AllCartWrapper = styled.div`
 `;
 
 const CheckoutWrapper = styled.div`
-  border: 1px solid blue;
   max-width: 60%;
   width: 60%;
   display: flex;
@@ -41,9 +44,22 @@ const CheckoutWrapper = styled.div`
 `;
 
 const ShoppingCart = () => {
-  const { cart } = useContext(ClientContext);
+  const { cart, setCart } = useContext(ClientContext);
 
-  const total = cart.reduce((acc, current) => acc + current.price, 0);
+  const total = cart.reduce(
+    (acc, current) => acc + current.price * current.quantity,
+    0
+  );
+
+  const newQuantity = (item, newQuantity) => {
+    const updatedCart = cart.map((product) =>
+      product.id === item.id
+        ? { ...product, quantity: parseInt(newQuantity) }
+        : product
+    );
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
 
   return (
     <>
@@ -54,13 +70,20 @@ const ShoppingCart = () => {
         </CheckoutWrapper>
         <CartWrapper>
           {cart.map((item) => (
-            <div key={item.id}>
+            <div key={item.title}>
               <img src={item.image} alt="" />
               <span>
                 <h6>
                   {item.title} ${item.price}
                 </h6>
-                <button>Remove</button>
+                <div>
+                  <Input
+                    type="number"
+                    value={item.quantity}
+                    onChange={(e) => newQuantity(item, e.target.value)}
+                  />
+                  <button>Remove</button>
+                </div>
               </span>
             </div>
           ))}
