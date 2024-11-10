@@ -43,6 +43,15 @@ const CheckoutWrapper = styled.div`
   padding: 1rem;
 `;
 
+const AddSubstract = styled.button`
+  /* max-width: fit-content; */
+  border-radius: ${(props) =>
+    props.$plus ? "10px 0 0 10px" : "0 10px 10px 0"};
+  min-width: 1.5rem;
+  max-width: 1.5rem;
+  font-weight: 800;
+`;
+
 const ShoppingCart = () => {
   const { cart, setCart } = useContext(ClientContext);
 
@@ -51,12 +60,27 @@ const ShoppingCart = () => {
     0
   );
 
-  const newQuantity = (item, newQuantity) => {
-    const updatedCart = cart.map((product) =>
-      product.id === item.id
-        ? { ...product, quantity: parseInt(newQuantity) }
-        : product
-    );
+  const newQuantity = (item, newQuantity, event) => {
+    let updatedCart;
+    if (event && event.type === "click") {
+      updatedCart = cart.map((product) =>
+        product.id === item.id
+          ? {
+              ...product,
+              quantity:
+                product.quantity == 1 && newQuantity == -1
+                  ? product.quantity
+                  : product.quantity + newQuantity,
+            }
+          : product
+      );
+    } else {
+      updatedCart = cart.map((product) =>
+        product.id === item.id
+          ? { ...product, quantity: parseInt(newQuantity) }
+          : product
+      );
+    }
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
@@ -83,12 +107,22 @@ const ShoppingCart = () => {
                   {item.title} ${item.price}
                 </h6>
                 <div>
+                  <AddSubstract $plus onClick={(e) => newQuantity(item, 1, e)}>
+                    {" "}
+                    +{" "}
+                  </AddSubstract>
                   <Input
                     type="number"
                     value={item.quantity}
                     onChange={(e) => newQuantity(item, e.target.value)}
                     min={1}
                   />
+                  <AddSubstract
+                    $minus
+                    onClick={(e) => newQuantity(item, -1, e)}>
+                    {" "}
+                    -{" "}
+                  </AddSubstract>{" "}
                   <button onClick={() => removeFromCart(item)}>Remove</button>
                 </div>
               </span>
