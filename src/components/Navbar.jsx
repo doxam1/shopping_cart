@@ -88,6 +88,9 @@ const Navbar = () => {
         <NavLink to="shop" style={navLinkActiveStyle}>
           &nbsp;&nbsp;Shop&nbsp;&nbsp;
         </NavLink>
+        <NavLink to="#">About</NavLink>
+        <NavLink to="#">Contact</NavLink>
+        <NavLink to="#">Sign Up</NavLink>
         <NavLink to="cart" className="iconCart">
           <IoCartOutline />
           {cart.length > 0 && <CartItemsNum>{`${cart.length}`}</CartItemsNum>}
