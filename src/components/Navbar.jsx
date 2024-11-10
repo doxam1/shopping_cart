@@ -14,9 +14,31 @@ const Wrapper = styled.div`
   gap: 1em;
   font-size: 21px;
 
+  & .menu {
+    position: fixed;
+    bottom: 0;
+    background-color: #116392;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    & a {
+      color: white;
+    }
+
+    @media (min-width: 600px) {
+      position: static;
+      background-color: #fff;
+
+      & a {
+        color: #424242;
+      }
+    }
+  }
+
   a {
-    padding: 0.4em 0.6em;
     color: #424242;
+    padding: 0.4em 0.6em;
     text-decoration: none;
 
     &:not(.icon):not(.iconCart) {
@@ -85,12 +107,14 @@ const Navbar = () => {
         <NavLink to="/" className={"icon"}>
           <FaHome />
         </NavLink>
-        <NavLink to="shop" style={navLinkActiveStyle}>
-          &nbsp;&nbsp;Shop&nbsp;&nbsp;
-        </NavLink>
-        <NavLink to="#">About</NavLink>
-        <NavLink to="#">Contact</NavLink>
-        <NavLink to="#">Sign Up</NavLink>
+        <div className="menu">
+          <NavLink to="shop" style={navLinkActiveStyle}>
+            Shop
+          </NavLink>
+          <NavLink to="#">About</NavLink>
+          <NavLink to="#">Contact</NavLink>
+          <NavLink to="#">Sign Up</NavLink>
+        </div>
         <NavLink to="cart" className="iconCart">
           <IoCartOutline />
           {cart.length > 0 && <CartItemsNum>{`${cart.length}`}</CartItemsNum>}
