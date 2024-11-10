@@ -5,7 +5,7 @@ import styled from "styled-components";
 const CartWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 60%;
+  max-width: 90%;
   padding: 1rem 1rem 2rem;
   margin: 0 auto;
 
@@ -13,13 +13,33 @@ const CartWrapper = styled.div`
     border: 1px solid;
     min-height: 3rem;
     display: flex;
-    flex-direction: column;
     padding: 1rem;
     justify-content: space-around;
     align-items: center;
 
-    & img {
-      max-width: 30%;
+    & span {
+      text-align: center;
+      max-width: 150px;
+      min-width: 70%;
+    }
+
+    & .info {
+      max-width: 250px;
+      margin: 0 auto;
+
+      & input {
+        max-width: 3rem;
+      }
+    }
+
+    & .itemImg {
+      min-width: 30%;
+      max-width: 200px;
+      flex-shrink: 1;
+      text-align: center;
+      & img {
+        max-width: 80%;
+      }
     }
   }
 `;
@@ -44,7 +64,6 @@ const CheckoutWrapper = styled.div`
 `;
 
 const AddSubstract = styled.button`
-  /* max-width: fit-content; */
   border-radius: ${(props) =>
     props.$plus ? "10px 0 0 10px" : "0 10px 10px 0"};
   min-width: 1.5rem;
@@ -101,12 +120,14 @@ const ShoppingCart = () => {
         <CartWrapper>
           {cart.map((item) => (
             <div key={item.title}>
-              <img src={item.image} alt="" />
+              <div className="itemImg">
+                <img src={item.image} alt="" />
+              </div>
               <span>
                 <h6>
                   {item.title} ${item.price}
                 </h6>
-                <div>
+                <div className="info">
                   <AddSubstract $plus onClick={(e) => newQuantity(item, 1, e)}>
                     {" "}
                     +{" "}
