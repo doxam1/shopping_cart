@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
-  padding: 0 1rem;
+  padding: 0 1rem 1.5rem;
 `;
 
 const Products = () => {
