@@ -25,6 +25,7 @@ const Products = () => {
   const [error, setError] = useState(null);
 
   const { searchStr } = useContext(ClientContext);
+  const [noItems, setNoItems] = useState(false);
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -38,6 +39,7 @@ const Products = () => {
               item.title.toLowerCase().includes(searchStr.toLowerCase())
             ))
           : (inventory = Products);
+        inventory.length == 0 ? setNoItems(true) : setNoItems(false);
         setData(inventory);
         setError(null);
       } catch (err) {
@@ -50,14 +52,6 @@ const Products = () => {
 
     fetchProductData();
   }, [searchStr]);
-
-  // let filterdItems;
-
-  // if (searchStr && data) {
-  //   filterdItems = data.filter((item) =>
-  //     item.title.toLowerCase().includes(searchStr.toLowerCase())
-  //   );
-  // }
 
   return (
     <>
@@ -76,6 +70,7 @@ const Products = () => {
                 product={product}
               />
             ))}
+          {noItems && <p> No Items Found. </p>}
         </Wrapper>
       </div>
     </>
