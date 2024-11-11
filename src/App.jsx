@@ -22,6 +22,7 @@ const ClientContext = createContext();
 
 function App() {
   const [cart, setCart] = useState([]);
+  const [searchStr, setSearchStr] = useState(null);
 
   // get cart on rerenders&page refresh from local storages:
   useEffect(() => {
@@ -31,7 +32,8 @@ function App() {
 
   return (
     <>
-      <ClientContext.Provider value={{ cart, setCart }}>
+      <ClientContext.Provider
+        value={{ cart, setCart, searchStr, setSearchStr }}>
         <RouterProvider router={router} />
       </ClientContext.Provider>
     </>

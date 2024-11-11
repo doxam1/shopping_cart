@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ProductCard from "./ProductCard";
 import { FadeLoader } from "react-spinners";
+import PropTypes from "prop-types";
+import { useContext } from "react";
+import { ClientContext } from "../../App";
 
 const Spinner = styled(FadeLoader)`
   margin: 0 auto;
@@ -21,13 +24,21 @@ const Products = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const { searchStr } = useContext(ClientContext);
+
   useEffect(() => {
     const fetchProductData = async () => {
       try {
         const Products = await getFetcherWithNativeFetch(
           "https://fakestoreapi.com/products"
         );
-        setData(Products);
+        let inventory;
+        searchStr
+          ? (inventory = Products.filter((item) =>
+              item.title.toLowerCase().includes(searchStr.toLowerCase())
+            ))
+          : (inventory = Products);
+        setData(inventory);
         setError(null);
       } catch (err) {
         setError(err.message);
@@ -38,7 +49,15 @@ const Products = () => {
     };
 
     fetchProductData();
-  }, []);
+  }, [searchStr]);
+
+  // let filterdItems;
+
+  // if (searchStr && data) {
+  //   filterdItems = data.filter((item) =>
+  //     item.title.toLowerCase().includes(searchStr.toLowerCase())
+  //   );
+  // }
 
   return (
     <>
@@ -64,3 +83,7 @@ const Products = () => {
 };
 
 export default Products;
+
+Products.propTypes = {
+  search: PropTypes.bool,
+};

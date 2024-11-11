@@ -5,6 +5,7 @@ import { GiRotaryPhone } from "react-icons/gi";
 import { IoCartOutline } from "react-icons/io5";
 import { useContext } from "react";
 import { ClientContext } from "../App";
+import Search from "./Search";
 
 const Wrapper = styled.div`
   /* padding: 1rem; */
@@ -49,7 +50,7 @@ const Wrapper = styled.div`
 
   & a:hover {
     opacity: 75%;
-    &:not(.icon):not(.iconCart) {
+    &:not(.icon):not(.iconCart):not(.searchBtn) {
       text-decoration-line: underline;
       text-underline-offset: 1rem;
       color: #053c4e;
@@ -88,7 +89,7 @@ const Header = styled(Wrapper)`
 `;
 const navLinkActiveStyle = ({ isActive }) => {
   return {
-    color: isActive ? "#077599" : "",
+    color: isActive ? "#899ea3" : "",
   };
 };
 const Navbar = () => {
@@ -107,6 +108,7 @@ const Navbar = () => {
         <NavLink to="/" className={"icon"}>
           <FaHome />
         </NavLink>
+        <Search />
         <div className="menu">
           <NavLink to="shop" style={navLinkActiveStyle}>
             Shop

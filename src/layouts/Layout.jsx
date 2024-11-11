@@ -1,11 +1,14 @@
 import Navbar from "../components/Navbar";
 import { Outlet } from "react-router-dom";
+import { useState } from "react";
 
 const Layout = () => {
+  const [searchStr, setSearchStr] = useState("");
+
   return (
     <>
       <Navbar />
-      <Outlet />
+      <Outlet context={[searchStr, setSearchStr]} />
     </>
   );
 };
