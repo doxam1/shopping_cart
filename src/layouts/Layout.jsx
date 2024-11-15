@@ -1,9 +1,10 @@
 import Navbar from "../components/Navbar";
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useContext } from "react";
+import { ClientContext } from "../App";
 
 const Layout = () => {
-  const [searchStr, setSearchStr] = useState("");
+  const { searchStr, setSearchStr } = useContext(ClientContext);
 
   return (
     <>

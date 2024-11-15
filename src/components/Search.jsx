@@ -1,6 +1,5 @@
-import Products from "./productFetch/Products";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ClientContext } from "../App";
 
@@ -20,19 +19,27 @@ const Label = styled.label`
 `;
 
 const Search = () => {
+  const navigate = useNavigate();
   const { setSearchStr } = useContext(ClientContext);
 
   const handleSearchInput = (e) => {
     if (e.target.value.indexOf(" ") >= 0) {
       return;
     }
-    return setSearchStr(e.target.value);
+    setSearchStr(e.target.value);
   };
 
   return (
     <>
       <Label htmlFor="search">
-        <input type="text" id="search" onChange={(e) => handleSearchInput(e)} />
+        <input
+          type="text"
+          id="search"
+          onChange={(e) => handleSearchInput(e)}
+          onKeyDown={(e) =>
+            e.key === "Enter" ? navigate("shop", { replace: true }) : null
+          }
+        />
         <Link to="shop" className="searchBtn">
           Find
         </Link>

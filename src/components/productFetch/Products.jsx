@@ -1,9 +1,8 @@
-import { getFetcherWithNativeFetch } from "./getProductWithNativeFetch";
+import getFetcherWithNativeFetch from "./getProductWithNativeFetch";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ProductCard from "./ProductCard";
 import { FadeLoader } from "react-spinners";
-import PropTypes from "prop-types";
 import { useContext } from "react";
 import { ClientContext } from "../../App";
 
@@ -78,7 +77,3 @@ const Products = () => {
 };
 
 export default Products;
-
-Products.propTypes = {
-  search: PropTypes.bool,
-};

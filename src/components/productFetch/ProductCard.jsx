@@ -89,7 +89,7 @@ const ProductCard = (props) => {
   // localStorage.setItem("cart", JSON.stringify(updatedCart));
 
   return (
-    <ProductDiv>
+    <ProductDiv data-testid="product-item">
       <ImageDiv>
         <img src={props.image} alt={props.title} />
       </ImageDiv>

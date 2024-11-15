@@ -1,4 +1,4 @@
-export const getFetcherWithNativeFetch = async (url) => {
+const getFetcherWithNativeFetch = async (url) => {
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -7,3 +7,5 @@ export const getFetcherWithNativeFetch = async (url) => {
 
   return response.json();
 };
+
+export default getFetcherWithNativeFetch;
